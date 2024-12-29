@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 const { home, login, Register } = require("../controllers/auth-controller");
 
 // Define the routes with their respective controllers

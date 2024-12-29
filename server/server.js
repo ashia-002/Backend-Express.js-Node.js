@@ -1,6 +1,8 @@
 const express = require("express");
 const router = require("./router/auth-router"); // Import the auth-router
 const app = express();
+const connectDb = require("./utils/db")
+
 
 app.use(express.json());
 
@@ -10,7 +12,9 @@ const PORT = 5000;
 
 app.use("/api/auth", router);
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+connectDb().then(() => {
+    // Start the server
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
 });
