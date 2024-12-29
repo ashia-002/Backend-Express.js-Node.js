@@ -1,18 +1,24 @@
 const express = require("express");
+const router = require("./router/auth-router");
 const app = express();
 
-const PORT = 5000
+const PORT = 5000;
 
-app.get("/", () => {
-    res.status(200).send("Welcome");
+// Middleware for the auth routes
+app.use("/api/auth", router);
+
+
+// Route to the homepage
+app.get("/", (req, res) => {
+    res.status(200).send("Welcome by server.js");
 });
 
-app.get("/register", () => {
-    res.status(200).send("Do your registraion in this page.");
+// Route to the registration page
+app.get("/register", (req, res) => {
+    res.status(200).send("Do your registration on this page.");
 });
 
-app.listen(PORT, (req, res) => {
-    console.log('server is running.')
-})
-
-
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
