@@ -1,12 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { home, login } = require("../controllers/auth-controller");
 
-router.get("/", (req, res) => {
-    res.status(200).send("Welcome by router");
-});
-
-router.route("/login").get((req, res) => {
-    res.status(200).send("You can login from this page");
-})
+// Define the routes with their respective controllers
+router.get("/", home); // Handles /api/auth
+router.get("/login", login); // Handles /api/auth/login
 
 module.exports = router;
