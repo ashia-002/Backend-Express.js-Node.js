@@ -8,7 +8,7 @@ const { home, login, Register } = require("../controllers/auth-controller");
 // router.get("/login", login); // Handles /api/auth/login
 
 router.route("/").get(home); // Handles /api/auth
-router.route("/login").get(login); // Handles /api/auth/login
+router.route("/login").post(login); // Handles /api/auth/login
 router.route("/register").post(Register);
 
 module.exports = router;

@@ -14,6 +14,26 @@ const home = async (req, res) => {
 // Controller for the login route
 const login = async (req, res) => {
     try {
+        const { email, password} = req.body;
+
+        const userExist = await User.findOne({email});
+
+        if(!userExist){
+            return res.status(400).json({message: "Invalid credentials"});
+        }
+
+        const user = await bcrypt.compare(password, userExist.password);
+
+        if(user){
+            res.status(200).json({
+                msg: "Login successful",
+                token: await userExist.generateToken(),
+                userId: userExist._id.toString(),
+            });
+        }else{
+            res.status(401).json({message: "Invalid email and password."})
+        }
+
         res.status(200).send("You can login from this page");
     } catch (error) {
         console.error("Error in login controller:", error);
